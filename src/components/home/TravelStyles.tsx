@@ -7,47 +7,56 @@ interface Category {
   icon: string;
   title: string;
   description: string;
-  gradient: string;
+  accent: string;
   href: string;
 }
 
 const categories: Category[] = [
   {
+    icon: "🌄",
+    title: "Discovery",
+    description: "Immersive journeys blending scenic rides with cultural experiences.",
+    accent: "bg-brand/10 text-brand border-brand/20",
+    href: "/tours?style=discovery",
+  },
+  {
     icon: "🎒",
     title: "Backpacking Trips",
     description: "Explore remote trails, vibrant cultures, and budget-friendly circuits.",
-    gradient: "from-orange-500/10 to-orange-500/5 text-orange-600 border-orange-500/20",
+    accent: "bg-navy/10 text-navy border-navy/20",
     href: "/tours?style=discovery",
   },
   {
     icon: "🚗",
     title: "Weekend Getaways",
     description: "Quick 2-3 day escapes to recharge your soul in mountain heights.",
-    gradient: "from-blue-500/10 to-blue-500/5 text-blue-600 border-blue-500/20",
+    accent: "bg-brand/10 text-brand border-brand/20",
     href: "/tours?style=discovery",
   },
   {
     icon: "⛰️",
     title: "Adventure Treks",
     description: "Push your limits hiking across rugged mountain passes and glaciers.",
-    gradient: "from-emerald-500/10 to-emerald-500/5 text-emerald-600 border-emerald-500/20",
+    accent: "bg-navy/10 text-navy border-navy/20",
     href: "/tours?style=discovery",
   },
   {
     icon: "⚡",
     title: "Raid Adventures",
     description: "Extreme routes, high passes, and challenging Himalayan terrains.",
-    gradient: "from-amber-500/10 to-amber-500/5 text-amber-600 border-amber-500/20",
+    accent: "bg-brand/10 text-brand border-brand/20",
     href: "/tours?style=raid",
   },
   {
     icon: "🔧",
     title: "Bike Tour Training",
     description: "Learn off-roading, bike handling, and mountain riding skills from the pros.",
-    gradient: "from-cyan-500/10 to-cyan-500/5 text-cyan-600 border-cyan-500/20",
+    accent: "bg-navy/10 text-navy border-navy/20",
     href: "/tours?style=training",
   },
 ];
+
+const doubled = [...categories, ...categories];
 
 export function TravelStyles() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -64,16 +73,18 @@ export function TravelStyles() {
       const cardEl = el.firstElementChild as HTMLElement | null;
       if (!cardEl) return;
 
-      const cardWidth = cardEl.offsetWidth + 20; // card width + gap
+      const cardWidth = cardEl.offsetWidth + 20;
       const maxScroll = el.scrollWidth - el.clientWidth;
 
       if (el.scrollLeft >= maxScroll - 10) {
-        // Smoothly loop back to start
-        el.scrollTo({ left: 0, behavior: "smooth" });
+        el.scrollTo({ left: 1, behavior: "instant" });
+        requestAnimationFrame(() => {
+          el.scrollBy({ left: cardWidth, behavior: "smooth" });
+        });
       } else {
         el.scrollBy({ left: cardWidth, behavior: "smooth" });
       }
-    }, 4000); // Scroll every 4 seconds
+    }, 4000);
   };
 
   const stopAutoPlay = () => {
@@ -88,11 +99,10 @@ export function TravelStyles() {
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     pauseTimeoutRef.current = setTimeout(() => {
       isPausedRef.current = false;
-    }, 5000); // Resume auto-play after 5 seconds of inactivity
+    }, 5000);
   };
 
   const handleScroll = () => {
-    // If user scrolls manually, trigger a temporary pause
     tempPauseAutoPlay();
   };
 
@@ -125,9 +135,8 @@ export function TravelStyles() {
   }, []);
 
   return (
-    <section className="py-16 bg-white border-b border-stone-200 overflow-hidden">
+    <section className="py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        
         {/* Section Header with Navigation Arrows */}
         <div className="flex items-end justify-between mb-10">
           <div>
@@ -168,23 +177,18 @@ export function TravelStyles() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            onMouseEnter={() => {
-              isPausedRef.current = true;
-            }}
-            onMouseLeave={() => {
-              isPausedRef.current = false;
-            }}
+            onMouseEnter={() => { isPausedRef.current = true; }}
+            onMouseLeave={() => { isPausedRef.current = false; }}
             className="flex gap-5 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory scroll-smooth"
           >
-            {categories.map((cat) => (
+            {doubled.map((cat, i) => (
               <Link
-                key={cat.title}
+                key={`${cat.title}-${i}`}
                 href={cat.href}
                 className="flex-shrink-0 w-[230px] sm:w-[260px] lg:w-[290px] snap-start bg-white border border-stone-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
               >
                 <div>
-                  {/* Category Circle Icon Container */}
-                  <div className={`w-14 h-14 rounded-full flex items-center justify-center text-3xl border mb-6 transition-all duration-300 group-hover:scale-110 ${cat.gradient}`}>
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center text-3xl border mb-6 transition-all duration-300 group-hover:scale-110 ${cat.accent}`}>
                     <span role="img" aria-label={cat.title}>
                       {cat.icon}
                     </span>
@@ -207,7 +211,6 @@ export function TravelStyles() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

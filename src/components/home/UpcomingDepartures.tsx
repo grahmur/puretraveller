@@ -146,21 +146,16 @@ export function UpcomingDepartures() {
           className="flex overflow-x-auto justify-start sm:justify-center md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 md:pb-0 no-scrollbar snap-x snap-mandatory scroll-smooth"
         >
           {upcomingList.map((dep, index) => {
-            // Spots remaining config
-            let spotsColor = "text-brand bg-brand/10 border-brand/20";
             let spotsIcon = "✅";
             let spotsText = `${dep.spotsLeft} seats available`;
 
             if (dep.spotsLeft === 0) {
-              spotsColor = "text-red-600 bg-red-50 border-red-100";
               spotsIcon = "🚫";
               spotsText = "Fully booked";
             } else if (dep.spotsLeft <= 3) {
-              spotsColor = "text-navy bg-navy/10 border-navy/20 animate-pulse";
               spotsIcon = "🔥";
               spotsText = `Only ${dep.spotsLeft} spots left!`;
             } else if (dep.spotsLeft <= 6) {
-              spotsColor = "text-brand bg-brand/10 border-brand/20";
               spotsIcon = "⏳";
               spotsText = `${dep.spotsLeft} spots left - filling fast`;
             }
@@ -186,7 +181,7 @@ export function UpcomingDepartures() {
                   )}
                   
                   {/* Spots Alert */}
-                  <span className={`absolute bottom-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border backdrop-blur-sm ${spotsColor}`}>
+                  <span className="absolute bottom-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-white border border-white/10">
                     {spotsIcon} {spotsText}
                   </span>
                 </div>
