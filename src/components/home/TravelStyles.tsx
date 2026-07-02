@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 
 interface Category {
@@ -13,190 +13,208 @@ interface Category {
 
 const categories: Category[] = [
   {
-    icon: "🌄",
-    title: "Discovery",
-    description: "Immersive journeys blending scenic rides with cultural experiences.",
-    gradient: "from-brand to-brand/60",
+    icon: "🎒",
+    title: "Backpacking Trips",
+    description: "Explore remote trails, vibrant cultures, and budget-friendly circuits.",
+    gradient: "from-orange-500/10 to-orange-500/5 text-orange-600 border-orange-500/20",
     href: "/tours?style=discovery",
   },
   {
-    icon: "🎒",
-    title: "Backpacking Trip",
-    description: "Budget-friendly adventures for the free-spirited explorer.",
-    gradient: "from-navy/80 to-brand",
+    icon: "🚗",
+    title: "Weekend Getaways",
+    description: "Quick 2-3 day escapes to recharge your soul in mountain heights.",
+    gradient: "from-blue-500/10 to-blue-500/5 text-blue-600 border-blue-500/20",
+    href: "/tours?style=discovery",
+  },
+  {
+    icon: "✈️",
+    title: "International Trips",
+    description: "Cross borders to discover exotic cultures and scenic overland routes.",
+    gradient: "from-purple-500/10 to-purple-500/5 text-purple-600 border-purple-500/20",
     href: "/tours?style=discovery",
   },
   {
     icon: "⛰️",
     title: "Adventure Treks",
-    description: "Push your limits on high-altitude trails and rugged terrain.",
-    gradient: "from-navy to-brand/70",
+    description: "Push your limits hiking across rugged mountain passes and glaciers.",
+    gradient: "from-emerald-500/10 to-emerald-500/5 text-emerald-600 border-emerald-500/20",
     href: "/tours?style=discovery",
   },
   {
-    icon: "⚡",
-    title: "Raid Adventures",
-    description: "Extreme routes, high passes, and raw Himalayan terrain.",
-    gradient: "from-navy to-navy/80",
-    href: "/tours?style=raid",
+    icon: "💖",
+    title: "Honeymoon Trips",
+    description: "Romantic mountain getaways, boutique stays, and memorable journeys.",
+    gradient: "from-rose-500/10 to-rose-500/5 text-rose-600 border-rose-500/20",
+    href: "/tours?style=discovery",
   },
   {
-    icon: "🔧",
-    title: "Training",
-    description: "Learn off-roading and mountain riding from experts.",
-    gradient: "from-brand/80 to-brand/40",
-    href: "/tours?style=training",
+    icon: "👔",
+    title: "Corporate Trips",
+    description: "Customized outdoor retreats, team bonding sessions, and workations.",
+    gradient: "from-cyan-500/10 to-cyan-500/5 text-cyan-600 border-cyan-500/20",
+    href: "/tours?style=discovery",
   },
 ];
 
-const doubled = [...categories, ...categories];
-
 export function TravelStyles() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const isMouseDown = useRef(false);
-  const startX = useRef(0);
-  const scrollLeftVal = useRef(0);
-  
-  const isHoveredRef = useRef(false);
-  const isInteractingRef = useRef(false);
-  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const autoPlayIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPausedRef = useRef(false);
 
-  const handleInteractionStart = () => {
-    isInteractingRef.current = true;
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-      resumeTimeoutRef.current = null;
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    autoPlayIntervalRef.current = setInterval(() => {
+      if (isPausedRef.current || !scrollRef.current) return;
+
+      const el = scrollRef.current;
+      const cardEl = el.firstElementChild as HTMLElement | null;
+      if (!cardEl) return;
+
+      const cardWidth = cardEl.offsetWidth + 20; // card width + gap
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      if (el.scrollLeft >= maxScroll - 10) {
+        // Smoothly loop back to start
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    }, 4000); // Scroll every 4 seconds
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+      autoPlayIntervalRef.current = null;
     }
   };
 
-  const handleInteractionEnd = () => {
-    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-    resumeTimeoutRef.current = setTimeout(() => {
-      isInteractingRef.current = false;
-    }, 2500); // Resume auto-scroll after 2.5 seconds of inactivity
+  const tempPauseAutoPlay = () => {
+    isPausedRef.current = true;
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      isPausedRef.current = false;
+    }, 5000); // Resume auto-play after 5 seconds of inactivity
   };
 
-  // Mouse Drag to Scroll Handlers (Desktop manual scrolling)
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isMouseDown.current = true;
+  const handleScroll = () => {
+    // If user scrolls manually, trigger a temporary pause
+    tempPauseAutoPlay();
+  };
+
+  const scrollLeft = () => {
     if (!scrollRef.current) return;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeftVal.current = scrollRef.current.scrollLeft;
-    handleInteractionStart();
+    const el = scrollRef.current;
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    if (!cardEl) return;
+    const cardWidth = cardEl.offsetWidth + 20;
+    el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+    tempPauseAutoPlay();
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isMouseDown.current || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5; // Speed multiplier
-    scrollRef.current.scrollLeft = scrollLeftVal.current - walk;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    if (isMouseDown.current) {
-      isMouseDown.current = false;
-      handleInteractionEnd();
-    }
+  const scrollRight = () => {
+    if (!scrollRef.current) return;
+    const el = scrollRef.current;
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    if (!cardEl) return;
+    const cardWidth = cardEl.offsetWidth + 20;
+    el.scrollBy({ left: cardWidth, behavior: "smooth" });
+    tempPauseAutoPlay();
   };
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    let animationId: number;
-    let lastTime = performance.now();
-
-    const loop = (time: number) => {
-      // Calculate delta to keep speed identical regardless of monitor refresh rate
-      const delta = (time - lastTime) / 16.666;
-      lastTime = time;
-
-      if (!isInteractingRef.current && !isHoveredRef.current && !isMouseDown.current) {
-        // Continuous pixel-level scroll (0.6px per frame at 60fps)
-        el.scrollLeft += 0.6 * delta;
-
-        // Infinite loop wrap check
-        const halfWidth = el.scrollWidth / 2;
-        if (el.scrollLeft >= halfWidth) {
-          el.scrollLeft -= halfWidth;
-        }
-      }
-
-      animationId = requestAnimationFrame(loop);
-    };
-
-    animationId = requestAnimationFrame(loop);
-
+    startAutoPlay();
     return () => {
-      cancelAnimationFrame(animationId);
-      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      stopAutoPlay();
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     };
   }, []);
 
   return (
-    <section className="py-12 bg-white border-b border-stone-200 overflow-hidden">
+    <section className="py-16 bg-white border-b border-stone-200 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-          
-          {/* Left: Heading */}
-          <div className="shrink-0 md:w-[240px] lg:w-[280px]">
-            <div className="w-12 h-1 bg-brand rounded-full mb-4" />
-            <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight leading-tight mb-2">
-              Travel
-              <br />
-              Categories
+        
+        {/* Section Header with Navigation Arrows */}
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <div className="w-12 h-1 bg-brand rounded-full mb-3" />
+            <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight leading-none">
+              Explore Categories
             </h2>
-            <p className="text-stone-500 text-sm md:text-base">
-              From high-octane raids to peaceful escapes — pick the pace, and we'll map the route.
+            <p className="text-stone-500 text-sm md:text-base mt-2">
+              Choose your travel style and find your next dream adventure.
             </p>
           </div>
 
-          {/* Right: Horizontal scrollable cards */}
-          <div className="flex-1 min-w-0 select-none">
-            <div
-              ref={scrollRef}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUpOrLeave}
-              onMouseLeave={() => {
-                isHoveredRef.current = false;
-                handleMouseUpOrLeave();
-              }}
-              onMouseEnter={() => {
-                isHoveredRef.current = true;
-              }}
-              onTouchStart={handleInteractionStart}
-              onTouchEnd={handleInteractionEnd}
-              className="flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing snap-x snap-mandatory"
+          {/* Desktop Navigation Arrows */}
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={scrollLeft}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 transition-all hover:bg-stone-50 hover:border-stone-300 active:scale-95 cursor-pointer shadow-sm"
+              aria-label="Previous categories"
             >
-              {doubled.map((cat, i) => (
-                <Link
-                  key={`${cat.title}-${i}`}
-                  href={cat.href}
-                  draggable="false"
-                  className="flex-shrink-0 w-[165px] sm:w-[190px] lg:w-[215px] snap-start rounded-2xl overflow-hidden p-5 bg-gradient-to-br from-stone-900 to-stone-900/90 border border-white/5 hover:border-brand/40 text-white group cursor-pointer hover:scale-[1.02] transition-all duration-300 shadow-md flex flex-col justify-between aspect-[3/4]"
-                >
-                  <div>
-                    <span className="text-2xl sm:text-3xl mb-3 block" role="img" aria-hidden="true">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={scrollRight}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 transition-all hover:bg-stone-50 hover:border-stone-300 active:scale-95 cursor-pointer shadow-sm"
+              aria-label="Next categories"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel Container */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            onMouseEnter={() => {
+              isPausedRef.current = true;
+            }}
+            onMouseLeave={() => {
+              isPausedRef.current = false;
+            }}
+            className="flex gap-5 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory scroll-smooth"
+          >
+            {categories.map((cat) => (
+              <Link
+                key={cat.title}
+                href={cat.href}
+                className="flex-shrink-0 w-[230px] sm:w-[260px] lg:w-[290px] snap-start bg-white border border-stone-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
+              >
+                <div>
+                  {/* Category Circle Icon Container */}
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center text-3xl border mb-6 transition-all duration-300 group-hover:scale-110 ${cat.gradient}`}>
+                    <span role="img" aria-label={cat.title}>
                       {cat.icon}
                     </span>
-                    <h3 className="text-sm sm:text-base font-extrabold mb-1.5 leading-tight truncate group-hover:text-brand transition-colors">
-                      {cat.title}
-                    </h3>
-                    <p className="text-[10px] sm:text-xs text-stone-300 leading-relaxed line-clamp-3 mb-3">
-                      {cat.description}
-                    </p>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-stone-400 group-hover:text-brand transition-colors">
-                    Explore &rarr;
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
 
+                  <h3 className="text-base sm:text-lg font-bold text-stone-900 mb-2 group-hover:text-brand transition-colors">
+                    {cat.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-stone-500 leading-relaxed pr-2">
+                    {cat.description}
+                  </p>
+                </div>
+
+                <div className="mt-6 flex items-center gap-1 text-xs sm:text-sm font-bold text-brand group-hover:gap-2 transition-all">
+                  <span>Explore Tours</span>
+                  <span>&rarr;</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );
