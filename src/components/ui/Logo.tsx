@@ -7,7 +7,7 @@ interface LogoProps {
 
 export function Logo({ variant = "light", className = "" }: LogoProps) {
   const src =
-    variant === "dark" ? "/images/logo-dark.webp" : "/images/logo-light.webp";
+    variant === "light" ? "/images/logo-dark.webp" : "/images/logo-light.webp";
 
   return (
     <Image

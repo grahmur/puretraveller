@@ -11,7 +11,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <>
       <Header />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen pb-14 lg:pb-0">{children}</main>
       <Footer />
       <WhatsAppButton />
     </>

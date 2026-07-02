@@ -31,7 +31,7 @@ function ToursContent() {
 
   return (
     <main className="min-h-screen bg-stone-50">
-      <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 py-16 px-4 text-center">
+      <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 pt-36 pb-12 px-4 text-center">
         <SectionHeading
           title="Our Journeys"
           subtitle="Find your perfect adventure in the mountains"

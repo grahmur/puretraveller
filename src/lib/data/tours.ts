@@ -921,7 +921,7 @@ export const tours: Tour[] = [
           "After breakfast, drive back to Haridwar. Reflect on three magical days spent in one of the most beautiful valleys on Earth. Arrive in Haridwar by evening for onward connections. The Ganga Aarti at Har Ki Pauri makes for a fitting spiritual conclusion to your Himalayan journey.",
       },
     ],
-    images: ["https://images.unsplash.com/photo-1601203184018-6e1a8d739628?w=800&h=600&fit=crop"],
+    images: ["/images/tours/valley-of-flowers-trek.webp"],
     featured: false,
     style: "discovery",
     departures: [
@@ -1079,7 +1079,7 @@ export const tours: Tour[] = [
           "Start early for the longest riding day. Soak in one last view of Kinner Kailash at sunrise before descending through Kinnaur's apple valleys. Retrace the route through Rampur, Narkanda, and Shimla, with the Sutlej River as your constant companion. The afternoon ride through the Shivalik foothills brings you back to Chandigarh by evening. Return the motorcycle and conclude a weekend well spent — 550 km of pure Himalayan riding done right.",
       },
     ],
-    images: ["https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&h=600&fit=crop"],
+    images: ["/images/tours/kinnaur-kalpa-weekend-ride.webp"],
     featured: false,
     style: "liberty",
     departures: [
@@ -1242,7 +1242,7 @@ export const tours: Tour[] = [
           "After breakfast, transfer to Dharamsala bus stand or Gaggal Airport for your onward journey. For those with later departures, visit the Kangra Art Museum or the Norbulingka Institute — a centre dedicated to preserving Tibetan arts and crafts. The tour concludes having connected you to two of India's most powerful spiritual traditions.",
       },
     ],
-    images: ["https://images.unsplash.com/photo-1599033712733-c4de79fccfc9?w=800&h=600&fit=crop"],
+    images: ["/images/tours/amritsar-dharamshala-heritage.webp"],
     featured: false,
     style: "discovery",
     departures: [

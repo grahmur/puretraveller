@@ -103,6 +103,7 @@ export interface Testimonial {
   rating: number;
   text: string;
   avatarInitials: string;      // fallback when no image is available
+  avatarUrl?: string;
 }
 
 export interface TeamMember {

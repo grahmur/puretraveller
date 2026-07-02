@@ -2,55 +2,65 @@ import type { Testimonial } from "@/lib/types";
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
-  maxWords?: number;
   className?: string;
-}
-
-function truncateWords(text: string, max: number): string {
-  const words = text.split(/\s+/);
-  if (words.length <= max) return text;
-  return words.slice(0, max).join(" ") + "...";
 }
 
 export function TestimonialCard({
   testimonial,
-  maxWords = 30,
   className = "",
 }: TestimonialCardProps) {
-  const { name, tourName, rating, text, avatarInitials } = testimonial;
-  const stars = Array.from({ length: 5 }, (_, i) => i < rating);
+  const { name, tourName, text, avatarInitials } = testimonial;
 
   return (
     <div
-      className={`bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 ${className}`}
+      className={`bg-white rounded-3xl p-6 border border-stone-200/60 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-[210px] sm:h-[220px] ${className}`}
     >
-      {/* Top row: avatar + name + stars */}
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-lg bg-stone-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
-          {avatarInitials}
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="font-semibold text-stone-900 text-sm truncate">{name}</p>
-          <p className="text-xs text-stone-400 truncate">{tourName}</p>
-        </div>
-        <div className="flex gap-0.5 shrink-0">
-          {stars.map((filled, i) => (
-            <span
-              key={i}
-              className={`text-sm ${filled ? "text-brand" : "text-stone-200"}`}
-            >
-              ★
-            </span>
+      {/* Decorative quote mark */}
+      <span className="absolute top-4 right-6 text-brand/10 font-serif text-8xl select-none leading-none pointer-events-none" aria-hidden="true">
+        &ldquo;
+      </span>
+
+      <div>
+        {/* Rating Stars */}
+        <div className="flex gap-0.5 text-amber-500 mb-3">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span key={i} className="text-sm">★</span>
           ))}
         </div>
+
+        {/* Review Quote Text - clamped to max 3 lines to keep card short */}
+        <p className="text-stone-600 text-[14px] leading-relaxed font-medium italic pr-6 line-clamp-3">
+          &ldquo;{text}&rdquo;
+        </p>
       </div>
 
-      {/* Quote */}
-      <p className="text-stone-600 text-sm leading-relaxed line-clamp-3">
-        <span className="text-brand font-serif mr-1">&ldquo;</span>
-        {truncateWords(text, maxWords)}
-        <span className="text-brand font-serif ml-1">&rdquo;</span>
-      </p>
+      {/* Reviewer Meta Info */}
+      <div className="flex items-center gap-3.5 border-t border-stone-100 pt-3 mt-auto">
+        {/* Circle Avatar Image or Fallback Initials */}
+        {testimonial.avatarUrl ? (
+          <img
+            src={testimonial.avatarUrl}
+            alt={name}
+            className="w-10 h-10 rounded-full object-cover shrink-0 border border-brand/10"
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand/20 to-brand/10 text-brand flex items-center justify-center font-bold text-xs shrink-0 border border-brand/10">
+            {avatarInitials}
+          </div>
+        )}
+
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="font-extrabold text-stone-900 text-sm truncate">{name}</span>
+            <span className="text-[9px] text-brand bg-brand/10 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex items-center gap-0.5 shrink-0">
+              <span>✓</span> Rider
+            </span>
+          </div>
+          <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest truncate mt-0.5">
+            {tourName}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

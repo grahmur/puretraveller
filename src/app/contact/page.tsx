@@ -61,7 +61,7 @@ export default function ContactPage() {
   return (
     <main>
       {/* Hero Banner */}
-      <section className="bg-gradient-to-br from-navy via-brand to-brand/80 py-20 text-center px-4">
+      <section className="bg-gradient-to-br from-navy via-brand to-brand/80 pt-36 pb-16 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-white">
           Get in Touch
         </h1>
