@@ -13,8 +13,8 @@ export default function Home() {
       <HeroCarousel />
       <TrendingRegions />
       <UpcomingDepartures />
-      <FeaturedTours />
       <TravelStyles />
+      <FeaturedTours />
       <WhyChooseUs />
       <Testimonials />
       <CTASection />
