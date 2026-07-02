@@ -69,8 +69,8 @@ function FloatingDropdown({
                   href={item.href}
                   className={`flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] transition-all duration-200 ${
                     pathname === item.href
-                      ? "bg-brand/10 text-brand/80 font-semibold"
-                      : "text-stone-700 hover:bg-stone-50 hover:text-brand/80 hover:pl-5"
+                      ? "bg-brand/10 text-brand font-semibold"
+                      : "text-stone-700 hover:bg-stone-50 hover:text-brand hover:pl-5"
                   }`}
                 >
                   <span className="text-lg" aria-hidden="true">{item.icon}</span>
@@ -171,97 +171,96 @@ export function Header() {
     : "";
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
-      <div className={`transition-all duration-300 ${glass}`}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-6 py-4">
-          {/* Logo */}
-          <Link href="/" className="text-white">
-            <Logo variant="dark" />
-          </Link>
+    <>
+      {/* Header bar */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <div className={`transition-all duration-300 ${glass}`}>
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-6 py-4">
+            <Link href="/" className="text-white">
+              <Logo variant="dark" />
+            </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 lg:flex">
-            <FloatingDropdown
-              label="Destinations"
-              items={DESTINATIONS}
-              open={dropdownOpen === "destinations"}
-              onEnter={() => handleEnter("destinations")}
-              onLeave={handleLeave}
-              pathname={pathname}
-            />
-            <FloatingDropdown
-              label="Travel Styles"
-              items={TRAVEL_STYLES}
-              open={dropdownOpen === "travel-styles"}
-              onEnter={() => handleEnter("travel-styles")}
-              onLeave={handleLeave}
-              pathname={pathname}
-            />
-            <Link
-              href="/about"
-              className={`text-[15px] font-semibold tracking-wide transition-colors ${
-                pathname === "/about" ? "text-brand" : "text-white hover:text-white"
-              }`}
-            >
-              About
-            </Link>
-            <Link
-              href="/tours"
-              className={`text-[15px] font-semibold tracking-wide transition-colors ${
-                pathname === "/tours" ? "text-brand" : "text-white hover:text-white"
-              }`}
-            >
-              Departures
-            </Link>
-          </nav>
+            <nav className="hidden items-center gap-8 lg:flex">
+              <FloatingDropdown
+                label="Destinations"
+                items={DESTINATIONS}
+                open={dropdownOpen === "destinations"}
+                onEnter={() => handleEnter("destinations")}
+                onLeave={handleLeave}
+                pathname={pathname}
+              />
+              <FloatingDropdown
+                label="Travel Styles"
+                items={TRAVEL_STYLES}
+                open={dropdownOpen === "travel-styles"}
+                onEnter={() => handleEnter("travel-styles")}
+                onLeave={handleLeave}
+                pathname={pathname}
+              />
+              <Link
+                href="/about"
+                className={`text-[15px] font-semibold tracking-wide transition-colors ${
+                  pathname === "/about" ? "text-brand" : "text-white hover:text-white"
+                }`}
+              >
+                About
+              </Link>
+              <Link
+                href="/tours"
+                className={`text-[15px] font-semibold tracking-wide transition-colors ${
+                  pathname === "/tours" ? "text-brand" : "text-white hover:text-white"
+                }`}
+              >
+                Departures
+              </Link>
+            </nav>
 
-          {/* Desktop right */}
-          <div className="hidden items-center gap-3 lg:flex">
-            <a
-              href={`tel:${CONTACT_PHONE}`}
-              className="rounded-full p-2 text-white/70 hover:text-white transition-colors"
-              aria-label="Call us"
+            <div className="hidden items-center gap-3 lg:flex">
+              <a
+                href={`tel:${CONTACT_PHONE}`}
+                className="rounded-full p-2 text-white/70 hover:text-white transition-colors"
+                aria-label="Call us"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </a>
+              <Link
+                href="/contact"
+                className="rounded-full border border-white/30 px-5 py-2 text-[15px] font-semibold tracking-wide text-white transition-all duration-300 hover:border-brand hover:text-brand hover:shadow-lg hover:shadow-brand/10"
+              >
+                Contact Us
+              </Link>
+            </div>
+
+            <button
+              className="flex flex-col gap-1.5 p-2 lg:hidden"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-label="Toggle menu"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </a>
-            <Link
-              href="/contact"
-              className="rounded-full border border-white/30 px-5 py-2 text-[15px] font-semibold tracking-wide text-white transition-all duration-300 hover:border-brand hover:text-brand hover:shadow-lg hover:shadow-brand/10"
-            >
-              Contact Us
-            </Link>
+              <span
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  mobileOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition-opacity duration-300 ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </button>
           </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="flex flex-col gap-1.5 p-2 lg:hidden"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
-                mobileOpen ? "translate-y-2 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-6 bg-white transition-opacity duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
-                mobileOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
-            />
-          </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — completely separate from header bar */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-0 z-40 flex flex-col bg-black/95 backdrop-blur-xl lg:hidden overflow-y-auto pt-20">
+        <div className="fixed inset-0 z-40 flex flex-col bg-black/95 backdrop-blur-xl lg:hidden overflow-y-auto pt-20">
           <nav className="flex flex-col gap-1 px-4">
             <MobileDropdown
               label="Destinations"
@@ -303,13 +302,13 @@ export function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="rounded-full bg-brand px-4 py-3 text-center text-lg font-semibold text-black hover:bg-brand/80 transition-colors"
+              className="rounded-full bg-brand px-4 py-3 text-center text-lg font-semibold text-white hover:bg-brand/80 transition-colors"
             >
               Contact Us
             </Link>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

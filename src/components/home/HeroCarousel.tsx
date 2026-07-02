@@ -22,7 +22,7 @@ export function HeroCarousel() {
   }, [nextSlide]);
 
   return (
-    <section className="relative min-h-[55vh] md:min-h-[80vh] flex items-end overflow-hidden bg-zinc-950">
+    <section className="relative min-h-[60vh] md:min-h-[80vh] flex flex-col justify-end overflow-hidden bg-zinc-950 pb-16 md:pb-10">
       {/* Background Images */}
       {featuredTours.map((tour, index) => (
         <div
@@ -41,8 +41,8 @@ export function HeroCarousel() {
         aria-hidden="true"
       />
 
-      {/* Main Content — bottom right */}
-      <div className="relative z-10 w-full ml-auto max-w-5xl px-4 pr-8 md:pr-20 pb-10 md:pb-16 flex justify-end">
+      {/* Main Content */}
+      <div className="relative z-10 w-full ml-auto max-w-5xl px-4 pr-8 md:pr-20 flex justify-end">
         <div className="max-w-xl text-right max-md:text-left max-md:max-w-sm">
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-white/80 mb-2 md:mb-3">
             {activeTour && TOUR_TYPE_LABELS[activeTour.type]} &mdash; {activeTour && REGION_LABELS[activeTour.region]}
@@ -52,7 +52,7 @@ export function HeroCarousel() {
             {activeTour?.name}
           </h1>
 
-          <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8 max-md:max-w-xs max-w-md ml-auto">
+          <p className="text-sm md:text-base text-white/70 mb-6 max-md:max-w-xs max-w-md ml-auto">
             {activeTour?.subtitle}
           </p>
 
@@ -70,8 +70,8 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Dot Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
+      {/* Dot Indicators — now in flow, below content */}
+      <div className="relative z-10 flex items-center justify-center gap-3 mt-8 md:mt-6">
         {featuredTours.map((_, index) => (
           <button
             key={index}
