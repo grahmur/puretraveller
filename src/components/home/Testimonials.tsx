@@ -69,7 +69,7 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-10">
+        <div className="flex flex-col items-start text-left mb-10">
           <div className="w-12 h-1 bg-brand rounded-full mb-4" />
           <h2 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight">
             What Our Riders Say

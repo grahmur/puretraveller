@@ -12,6 +12,7 @@ export function FeaturedTours() {
         <SectionHeading
           title="Featured Journeys"
           subtitle="Our most loved and carefully curated adventures"
+          align="left"
         />
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

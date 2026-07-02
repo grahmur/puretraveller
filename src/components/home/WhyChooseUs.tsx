@@ -8,6 +8,7 @@ export function WhyChooseUs() {
         <SectionHeading
           title="Why Ride With Us?"
           subtitle="What makes Pure Traveller your perfect travel partner"
+          align="left"
         />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

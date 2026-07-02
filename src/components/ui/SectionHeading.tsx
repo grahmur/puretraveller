@@ -22,18 +22,20 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={`${alignStyles[align]} ${className}`}>
-      <Tag className="text-3xl font-bold text-brand">{title}</Tag>
-      {subtitle && (
-        <p className="mt-3 text-lg text-stone-600 max-w-2xl mx-auto">
-          {subtitle}
-        </p>
-      )}
       {useDivider && (
         <div
-          className={`mt-4 h-1 w-16 bg-brand rounded-full ${
+          className={`h-1 w-12 bg-brand rounded-full mb-4 ${
             align === "center" ? "mx-auto" : ""
           }`}
         />
+      )}
+      <Tag className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
+        {title}
+      </Tag>
+      {subtitle && (
+        <p className={`mt-2 text-stone-500 text-base md:text-lg max-w-2xl ${align === "center" ? "mx-auto" : ""}`}>
+          {subtitle}
+        </p>
       )}
     </div>
   );

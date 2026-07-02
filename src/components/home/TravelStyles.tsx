@@ -27,13 +27,6 @@ const categories: Category[] = [
     href: "/tours?style=discovery",
   },
   {
-    icon: "✈️",
-    title: "International Trips",
-    description: "Cross borders to discover exotic cultures and scenic overland routes.",
-    gradient: "from-purple-500/10 to-purple-500/5 text-purple-600 border-purple-500/20",
-    href: "/tours?style=discovery",
-  },
-  {
     icon: "⛰️",
     title: "Adventure Treks",
     description: "Push your limits hiking across rugged mountain passes and glaciers.",
@@ -41,18 +34,18 @@ const categories: Category[] = [
     href: "/tours?style=discovery",
   },
   {
-    icon: "💖",
-    title: "Honeymoon Trips",
-    description: "Romantic mountain getaways, boutique stays, and memorable journeys.",
-    gradient: "from-rose-500/10 to-rose-500/5 text-rose-600 border-rose-500/20",
-    href: "/tours?style=discovery",
+    icon: "⚡",
+    title: "Raid Adventures",
+    description: "Extreme routes, high passes, and challenging Himalayan terrains.",
+    gradient: "from-amber-500/10 to-amber-500/5 text-amber-600 border-amber-500/20",
+    href: "/tours?style=raid",
   },
   {
-    icon: "👔",
-    title: "Corporate Trips",
-    description: "Customized outdoor retreats, team bonding sessions, and workations.",
+    icon: "🔧",
+    title: "Bike Tour Training",
+    description: "Learn off-roading, bike handling, and mountain riding skills from the pros.",
     gradient: "from-cyan-500/10 to-cyan-500/5 text-cyan-600 border-cyan-500/20",
-    href: "/tours?style=discovery",
+    href: "/tours?style=training",
   },
 ];
 
@@ -139,8 +132,8 @@ export function TravelStyles() {
         <div className="flex items-end justify-between mb-10">
           <div>
             <div className="w-12 h-1 bg-brand rounded-full mb-3" />
-            <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight leading-none">
-              Explore Categories
+            <h2 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight leading-none">
+              Travel Categories
             </h2>
             <p className="text-stone-500 text-sm md:text-base mt-2">
               Choose your travel style and find your next dream adventure.
