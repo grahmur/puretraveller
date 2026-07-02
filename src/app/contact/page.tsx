@@ -20,6 +20,7 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -29,9 +30,32 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: `New Enquiry from ${formData.name} — Pure Traveller`,
+          from_name: formData.name,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          preferredTour: formData.preferredTour || "Not specified",
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -159,8 +183,8 @@ export default function ContactPage() {
                     className="w-full rounded-lg border border-stone-200 px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors resize-y"
                   />
                 </div>
-                <Button type="submit" variant="primary" size="lg" className="w-full">
-                  Send Message
+                <Button type="submit" variant="primary" size="lg" className="w-full" disabled={sending}>
+                  {sending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             )}
