@@ -147,7 +147,7 @@ export function UpcomingDepartures() {
         >
           {upcomingList.map((dep, index) => {
             // Spots remaining config
-            let spotsColor = "text-emerald-600 bg-emerald-50 border-emerald-100";
+            let spotsColor = "text-brand bg-brand/10 border-brand/20";
             let spotsIcon = "✅";
             let spotsText = `${dep.spotsLeft} seats available`;
 
@@ -156,11 +156,11 @@ export function UpcomingDepartures() {
               spotsIcon = "🚫";
               spotsText = "Fully booked";
             } else if (dep.spotsLeft <= 3) {
-              spotsColor = "text-rose-600 bg-rose-50 border-rose-100 animate-pulse";
+              spotsColor = "text-navy bg-navy/10 border-navy/20 animate-pulse";
               spotsIcon = "🔥";
               spotsText = `Only ${dep.spotsLeft} spots left!`;
             } else if (dep.spotsLeft <= 6) {
-              spotsColor = "text-amber-600 bg-amber-50 border-amber-100";
+              spotsColor = "text-brand bg-brand/10 border-brand/20";
               spotsIcon = "⏳";
               spotsText = `${dep.spotsLeft} spots left - filling fast`;
             }

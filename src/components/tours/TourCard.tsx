@@ -10,10 +10,10 @@ interface TourCardProps {
 }
 
 const STYLE_CONFIG: Record<string, { bg: string; label: string }> = {
-  raid: { bg: "bg-red-600", label: "Raid" },
-  discovery: { bg: "bg-blue-600", label: "Discovery" },
-  liberty: { bg: "bg-emerald-600", label: "Liberty" },
-  training: { bg: "bg-brand/80", label: "Training" },
+  raid: { bg: "bg-navy", label: "Raid" },
+  discovery: { bg: "bg-brand", label: "Discovery" },
+  liberty: { bg: "bg-brand/80", label: "Liberty" },
+  training: { bg: "bg-brand/60", label: "Training" },
 };
 
 function formatDate(iso: string): string {
@@ -33,8 +33,8 @@ function getUpcomingDepartures(departures: DepartureDate[]): DepartureDate[] {
 }
 
 function spotsColor(spots: number): string {
-  if (spots === 0) return "text-red-600";
-  if (spots <= 5) return "text-orange-500";
+  if (spots === 0) return "text-navy/60";
+  if (spots <= 5) return "text-navy";
   return "text-brand";
 }
 

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  NAV_LINKS,
   SITE_NAME,
   SITE_TAGLINE,
   SITE_DESCRIPTION,
@@ -11,12 +10,6 @@ import {
   CONTACT_ADDRESS,
   SOCIAL_LINKS,
 } from "@/lib/constants";
-
-const footerLinks = [
-  ...NAV_LINKS,
-  { label: "Terms", href: "/terms" },
-  { label: "Privacy", href: "/privacy" },
-];
 
 const destinations = [
   { label: "Himachal Pradesh", href: "/tours?region=himachal" },

@@ -5,14 +5,14 @@ import { team } from "@/lib/data/team";
 import { HOME_STATS, WHY_CHOOSE_US } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "About Us | Pure Traveller",
+  title: "About Us",
   description:
     "Learn about Pure Traveller — a team of passionate riders leading unforgettable adventures across North India.",
 };
 
 export default function AboutPage() {
   return (
-    <main>
+    <>
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-navy via-brand to-brand/80 pt-36 pb-20 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-white">
@@ -130,6 +130,6 @@ export default function AboutPage() {
           </Button>
         </div>
       </section>
-    </main>
+    </>
   );
 }

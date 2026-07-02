@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Pure Traveller",
+  title: "Contact Us",
   description:
     "Get in touch with Pure Traveller for bookings, queries, or custom tour requests.",
 };

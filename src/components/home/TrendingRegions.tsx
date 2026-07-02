@@ -36,7 +36,7 @@ const REGIONS = [
   {
     id: "punjab",
     name: REGION_LABELS.punjab,
-    image: "https://images.unsplash.com/photo-1599033712733-c4de79fccfc9?w=600&h=800&fit=crop",
+    image: "/images/tours/amritsar-dharamshala-heritage.webp",
     href: "/tours?region=punjab",
     icon: "🌾",
   },

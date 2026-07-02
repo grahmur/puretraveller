@@ -82,19 +82,19 @@ export const TRAVEL_STYLE_INFO: Record<
     icon: "🏔️",
     description:
       "For thrill-seekers. Extreme routes, high passes, and raw Himalayan terrain.",
-    gradient: "from-red-900/80 to-orange-900/60",
+    gradient: "from-navy to-navy/80",
   },
   discovery: {
     icon: "🌄",
     description:
       "Immersive journeys blending scenic rides with cultural experiences.",
-    gradient: "from-blue-900/80 to-cyan-900/60",
+    gradient: "from-brand to-brand/60",
   },
   liberty: {
     icon: "🏍️",
     description:
       "Ride at your own pace. Self-guided tours with pre-booked stays and routes.",
-    gradient: "from-emerald-900/80 to-teal-900/60",
+    gradient: "from-navy/80 to-brand",
   },
   training: {
     icon: "🛠️",

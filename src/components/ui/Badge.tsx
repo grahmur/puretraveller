@@ -14,8 +14,8 @@ const variantStyles: Record<BadgeVariant, string> = {
   primary: "bg-brand/20 text-brand",
   secondary: "bg-brand/10 text-brand",
   outline: "border border-brand text-brand",
-  success: "bg-emerald-100 text-emerald-800",
-  warning: "bg-orange-100 text-orange-800",
+  success: "bg-brand/10 text-brand",
+  warning: "bg-navy/10 text-navy",
 };
 
 const sizeStyles: Record<BadgeSize, string> = {

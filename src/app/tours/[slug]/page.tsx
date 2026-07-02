@@ -52,7 +52,7 @@ export default async function TourDetailPage({ params }: Props) {
   const isBike = tour.type === "bike";
 
   return (
-    <main>
+    <>
       {/* ─── Hero Banner ─── */}
       <section className="relative h-[40vh] md:h-[50vh] min-h-[400px]">
         <div
@@ -305,7 +305,7 @@ export default async function TourDetailPage({ params }: Props) {
       <section className="bg-brand text-white py-12 text-center">
         <div className="max-w-2xl mx-auto px-4">
           <h2 className="text-3xl font-bold">Ready to Book?</h2>
-            <p className="mt-3 text-brand/20">
+            <p className="mt-3 text-white/60">
             Secure your spot on this unforgettable journey. Limited seats
             available for upcoming departures.
           </p>
@@ -319,6 +319,6 @@ export default async function TourDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

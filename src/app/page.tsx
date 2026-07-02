@@ -9,7 +9,7 @@ import { CTASection } from "@/components/home/CTASection";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <HeroCarousel />
       <TrendingRegions />
       <UpcomingDepartures />
@@ -18,6 +18,6 @@ export default function Home() {
       <WhyChooseUs />
       <Testimonials />
       <CTASection />
-    </main>
+    </>
   );
 }

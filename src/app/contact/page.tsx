@@ -21,6 +21,7 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -52,14 +53,19 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmitted(true);
+        setError(false);
+      } else {
+        setError(true);
       }
+    } catch {
+      setError(true);
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <main>
+    <>
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-navy via-brand to-brand/80 pt-36 pb-16 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-white">
@@ -78,6 +84,11 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-stone-900 mb-6">
               Send us a Message
             </h2>
+            {error && (
+              <div className="mb-6 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+                Something went wrong. Please try again or email us directly at {CONTACT_EMAIL}.
+              </div>
+            )}
             {submitted ? (
               <div className="text-center py-12">
                 <div className="text-5xl mb-4">✅</div>
@@ -92,6 +103,7 @@ export default function ContactPage() {
                     variant="outline"
                     onClick={() => {
                       setSubmitted(false);
+                      setError(false);
                       setFormData({
                         name: "",
                         email: "",
@@ -254,6 +266,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }
