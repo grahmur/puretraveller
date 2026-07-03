@@ -89,24 +89,49 @@ export default function ContactPage() {
     setError(false);
     setServerError("");
 
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      preferredTour: formData.preferredTour,
+      message: formData.message.trim(),
+    };
+
     try {
-      const response = await fetch("/api/contact", {
+      const apiRes = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          preferredTour: formData.preferredTour,
-          message: formData.message,
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
+      if (apiRes.ok) {
         setSubmitted(true);
         setError(false);
+        setSending(false);
+        return;
+      }
+
+      const result = await apiRes.json();
+      if (apiRes.status === 502) {
+        const directRes = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+            subject: `New Enquiry from ${payload.name} — Pure Traveller`,
+            from_name: payload.name,
+            ...payload,
+            preferredTour: payload.preferredTour || "Not specified",
+          }),
+        });
+
+        if (directRes.ok) {
+          setSubmitted(true);
+          setError(false);
+        } else {
+          setError(true);
+          setServerError("Failed to send message. Please email us directly.");
+        }
       } else {
         setError(true);
         setServerError(result.error || "Something went wrong.");

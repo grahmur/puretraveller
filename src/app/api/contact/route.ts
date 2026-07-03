@@ -137,7 +137,11 @@ export async function POST(request: NextRequest) {
   try {
     const response = await fetch(WEB3FORMS_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 PureTraveller/1.0",
+        Accept: "application/json",
+      },
       body: JSON.stringify({
         access_key: accessKey,
         subject: data.subject || `New Enquiry from ${data.name} — Pure Traveller`,
