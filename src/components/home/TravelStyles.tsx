@@ -104,6 +104,25 @@ export function TravelStyles() {
 
   const handleScroll = () => {
     tempPauseAutoPlay();
+
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    if (!cardEl) return;
+
+    const cardWidth = cardEl.offsetWidth + 20;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+
+    // If scrolled past the last card of the first set, loop back
+    if (el.scrollLeft >= maxScroll - 1) {
+      el.scrollTo({ left: 1, behavior: "instant" });
+    }
+    // If user scrolls left past the start, jump to the duplicate set's start
+    else if (el.scrollLeft <= 0) {
+      const midPoint = cardWidth * categories.length;
+      el.scrollTo({ left: midPoint, behavior: "instant" });
+    }
   };
 
   const scrollLeft = () => {
@@ -112,7 +131,15 @@ export function TravelStyles() {
     const cardEl = el.firstElementChild as HTMLElement | null;
     if (!cardEl) return;
     const cardWidth = cardEl.offsetWidth + 20;
-    el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+    if (el.scrollLeft <= 10) {
+      const midPoint = cardWidth * categories.length;
+      el.scrollTo({ left: midPoint, behavior: "instant" });
+      requestAnimationFrame(() => {
+        el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+      });
+    } else {
+      el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+    }
     tempPauseAutoPlay();
   };
 
@@ -122,7 +149,15 @@ export function TravelStyles() {
     const cardEl = el.firstElementChild as HTMLElement | null;
     if (!cardEl) return;
     const cardWidth = cardEl.offsetWidth + 20;
-    el.scrollBy({ left: cardWidth, behavior: "smooth" });
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (el.scrollLeft >= maxScroll - 10) {
+      el.scrollTo({ left: 1, behavior: "instant" });
+      requestAnimationFrame(() => {
+        el.scrollBy({ left: cardWidth, behavior: "smooth" });
+      });
+    } else {
+      el.scrollBy({ left: cardWidth, behavior: "smooth" });
+    }
     tempPauseAutoPlay();
   };
 

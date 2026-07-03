@@ -7,6 +7,7 @@ import type { Region, TourType, Difficulty, PackageTier, TravelStyle } from "@/l
 
 // ---- Site Metadata ----
 
+export const SITE_URL = "https://puretraveller.in";
 export const SITE_NAME = "Pure Traveller";
 export const SITE_TAGLINE = "Ride. Explore. Discover.";
 export const SITE_DESCRIPTION =

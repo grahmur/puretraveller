@@ -42,52 +42,67 @@ const REGIONS = [
   },
 ];
 
+const doubled = [...REGIONS, ...REGIONS];
+
 export function TrendingRegions() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const autoIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isInteracting, setIsInteracting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const startAutoScroll = () => {
+    stopAutoScroll();
+    autoIntervalRef.current = setInterval(() => {
+      const container = scrollContainerRef.current;
+      if (!container || !isMobile || isInteracting) return;
+
+      const firstChild = container.firstElementChild as HTMLElement | null;
+      if (!firstChild) return;
+
+      const cardWidth = firstChild.offsetWidth + 16; // 16 = gap-4
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+      if (container.scrollLeft >= maxScrollLeft - 10) {
+        // Snap back to start of first set
+        container.scrollTo({ left: 1, behavior: "instant" });
+        requestAnimationFrame(() => {
+          container.scrollBy({ left: cardWidth, behavior: "smooth" });
+        });
+      } else {
+        container.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    }, 4000);
+  };
+
+  const stopAutoScroll = () => {
+    if (autoIntervalRef.current) {
+      clearInterval(autoIntervalRef.current);
+      autoIntervalRef.current = null;
+    }
+  };
+
+  const handleInteractionStart = () => {
+    setIsInteracting(true);
+    stopAutoScroll();
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+  };
+
+  const handleInteractionEnd = () => {
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsInteracting(false);
+      startAutoScroll();
+    }, 3000);
+  };
 
   useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    if (window.innerWidth < 768) {
+      startAutoScroll();
+    }
+
     const container = scrollContainerRef.current;
     if (!container) return;
-
-    let intervalId: ReturnType<typeof setInterval>;
-    let interactionTimeoutId: ReturnType<typeof setTimeout>;
-
-    const startAutoScroll = () => {
-      intervalId = setInterval(() => {
-        if (window.innerWidth >= 768 || isInteracting) return;
-
-        const firstChild = container.firstElementChild as HTMLElement | null;
-        if (!firstChild) return;
-
-        const cardWidth = firstChild.offsetWidth;
-        const gap = 20; // Matches gap-5 (5 * 4px = 20px)
-        const scrollAmount = cardWidth + gap;
-
-        const maxScrollLeft = container.scrollWidth - container.clientWidth;
-
-        // If we are at or near the end, smooth scroll back to the start
-        if (container.scrollLeft >= maxScrollLeft - 10) {
-          container.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        }
-      }, 4000); // 4-second delay
-    };
-
-    startAutoScroll();
-
-    const handleInteractionStart = () => {
-      setIsInteracting(true);
-      if (interactionTimeoutId) clearTimeout(interactionTimeoutId);
-    };
-
-    const handleInteractionEnd = () => {
-      // Wait 3 seconds of inactivity before resuming auto-scroll
-      interactionTimeoutId = setTimeout(() => {
-        setIsInteracting(false);
-      }, 3000);
-    };
 
     container.addEventListener("touchstart", handleInteractionStart, { passive: true });
     container.addEventListener("touchend", handleInteractionEnd, { passive: true });
@@ -95,19 +110,20 @@ export function TrendingRegions() {
     container.addEventListener("mouseup", handleInteractionEnd);
 
     return () => {
-      clearInterval(intervalId);
-      if (interactionTimeoutId) clearTimeout(interactionTimeoutId);
+      stopAutoScroll();
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
       container.removeEventListener("touchstart", handleInteractionStart);
       container.removeEventListener("touchend", handleInteractionEnd);
       container.removeEventListener("mousedown", handleInteractionStart);
       container.removeEventListener("mouseup", handleInteractionEnd);
     };
-  }, [isInteracting]);
+  }, []);
+
+  const displayRegions = isMobile ? doubled : REGIONS;
 
   return (
-    <section className="pt-12 pb-10 bg-stone-50 overflow-hidden border-b border-stone-200">
+    <section className="pt-12 pb-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        
         {/* Section Heading */}
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-12 h-1 bg-brand rounded-full mb-4" />
@@ -120,21 +136,22 @@ export function TrendingRegions() {
         </div>
 
         {/* Regions Layout */}
-        {/* Desktop Grid & Mobile Horizontal Scroll */}
         <div
           ref={scrollContainerRef}
           className="flex overflow-x-auto justify-start sm:justify-center md:grid md:grid-cols-5 gap-4 md:gap-5 pb-6 md:pb-0 no-scrollbar snap-x snap-mandatory scroll-smooth"
         >
-          {REGIONS.map((region) => (
+          {displayRegions.map((region, i) => (
             <Link
-              key={region.id}
+              key={`${region.id}-${i}`}
               href={region.href}
-              className="flex-shrink-0 w-[30%] sm:w-[18%] md:w-auto snap-start group relative rounded-[20px] md:rounded-[40px] overflow-hidden aspect-[3/4.5] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border border-stone-200"
+              className="flex-shrink-0 w-[45%] sm:w-[18%] md:w-auto snap-start group relative rounded-[20px] md:rounded-[40px] overflow-hidden aspect-[3/4.5] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border border-stone-200"
             >
               {/* Background Image */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110"
                 style={{ backgroundImage: `url(${region.image})` }}
+                role="img"
+                aria-label={region.name}
               />
 
               {/* Tint Overlay */}
@@ -145,11 +162,11 @@ export function TrendingRegions() {
                 <span className="text-xl md:text-4xl mb-1 md:mb-2 filter drop-shadow" role="img" aria-hidden="true">
                   {region.icon}
                 </span>
-                
+
                 <h3 className="text-white font-extrabold text-[11px] sm:text-sm md:text-lg tracking-wide uppercase transition-all duration-300 group-hover:text-brand line-clamp-1">
                   {region.name.split(" ")[0]}
                 </h3>
-                
+
                 <span className="text-[9px] uppercase font-bold tracking-widest text-stone-300 mt-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hidden md:inline">
                   Explore &rarr;
                 </span>
@@ -157,7 +174,6 @@ export function TrendingRegions() {
             </Link>
           ))}
         </div>
-
       </div>
     </section>
   );

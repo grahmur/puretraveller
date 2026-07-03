@@ -1,11 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export function HeroCarousel() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const playVideo = async () => {
+      try {
+        video.muted = true;
+        video.playsInline = true;
+        await video.play();
+      } catch {
+        // Mobile browsers may still block — video will show as static image
+      }
+    };
+
+    // Try immediately
+    playVideo();
+
+    // Also try after first user interaction (scroll/tap)
+    const onInteraction = () => {
+      playVideo();
+      document.removeEventListener("touchstart", onInteraction);
+      document.removeEventListener("click", onInteraction);
+    };
+    document.addEventListener("touchstart", onInteraction, { once: true });
+    document.addEventListener("click", onInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", onInteraction);
+      document.removeEventListener("click", onInteraction);
+    };
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,17 +52,18 @@ export function HeroCarousel() {
     <section className="relative min-h-[70vh] md:min-h-[80vh] flex flex-col justify-end overflow-hidden bg-zinc-950 pt-28 pb-12 md:pt-36 md:pb-16">
       {/* Background Video */}
       <video
-        autoPlay
+        ref={videoRef}
         loop
         muted
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
+        poster="https://1czeipxq0mlnixlg.public.blob.vercel-storage.com/hero-poster.jpg"
       >
         <source
           src="https://1czeipxq0mlnixlg.public.blob.vercel-storage.com/hero.mp4"
           type="video/mp4"
         />
-        Your browser does not support the video tag.
       </video>
 
       {/* Dark Overlay for Text Contrast */}

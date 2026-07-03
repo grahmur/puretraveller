@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { team } from "@/lib/data/team";
@@ -7,12 +8,47 @@ import { HOME_STATS, WHY_CHOOSE_US } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Pure Traveller — a team of passionate riders leading unforgettable adventures across North India.",
+    "Pure Traveller is a team of passionate riders crafting unforgettable motorcycle and trekking adventures across Himachal, Ladakh, Uttarakhand, and Kashmir. Born from a love of the mountains and the open road.",
+  alternates: {
+    canonical: `${SITE_URL}/about`,
+  },
+  openGraph: {
+    title: "About Pure Traveller | Pure Traveller",
+    description:
+      "Pure Traveller is a team of passionate riders crafting unforgettable motorcycle and trekking adventures across Himachal, Ladakh, Uttarakhand, and Kashmir. Born from a love of the mountains and the open road.",
+    type: "website",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Pure Traveller",
+  url: "https://puretraveller.in",
+  description:
+    "Pure Traveller is a motorcycle and adventure tour operator based in Manali, Himachal Pradesh. We organise curated bike trips, trekking expeditions, and cultural tours across North India — from the high passes of Ladakh and the remote valleys of Spiti to the alpine meadows of Kashmir and the spiritual trails of Uttarakhand. Every journey is hand-scouted, led by experienced local guides, and built around safety, camaraderie, and the pure joy of travel.",
+  email: "hello@puretraveller.in",
+  telephone: "+91 96547 23856",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Manali",
+    addressRegion: "Himachal Pradesh",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://instagram.com/puretraveller",
+    "https://facebook.com/puretraveller",
+    "https://youtube.com/@puretraveller",
+  ],
 };
 
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-navy via-brand to-brand/80 pt-36 pb-20 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-white">

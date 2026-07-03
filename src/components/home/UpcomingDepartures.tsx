@@ -170,6 +170,8 @@ export function UpcomingDepartures() {
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                     style={{ backgroundImage: `url(${dep.tourImage})` }}
+                    role="img"
+                    aria-label={dep.tourName}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent" />
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { tours } from "@/lib/data/tours";
 import { formatPrice, formatDuration } from "@/lib/utils";
-import { REGION_LABELS, TOUR_TYPE_LABELS, DIFFICULTY_LABELS } from "@/lib/constants";
+import { SITE_URL, REGION_LABELS, TOUR_TYPE_LABELS, DIFFICULTY_LABELS } from "@/lib/constants";
 import { Badge } from "@/components/ui/Badge";
 import { Rating } from "@/components/ui/Rating";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -26,9 +26,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tour = tours.find((t) => t.slug === slug);
   if (!tour) return { title: "Tour Not Found" };
+  const tourImage = tour.images[0] ?? "/images/og-default.webp";
   return {
     title: tour.name,
     description: tour.overview,
+    alternates: {
+      canonical: `${SITE_URL}/tours/${tour.slug}`,
+    },
+    openGraph: {
+      title: `${tour.name} | Pure Traveller`,
+      description: tour.overview,
+      type: "website",
+      images: [
+        {
+          url: tourImage,
+          width: 1200,
+          height: 630,
+          alt: tour.name,
+        },
+      ],
+    },
   };
 }
 
@@ -51,13 +68,49 @@ export default async function TourDetailPage({ params }: Props) {
 
   const isBike = tour.type === "bike";
 
+  const tourJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Trip",
+    name: tour.name,
+    description: tour.overview,
+    url: `${SITE_URL}/tours/${tour.slug}`,
+    image: tour.images[0] ? `${SITE_URL}${tour.images[0]}` : undefined,
+    duration: `P${tour.duration.days}D`,
+    departureLocation: {
+      "@type": "Place",
+      name: tour.startLocation,
+    },
+    arrivalLocation: {
+      "@type": "Place",
+      name: tour.endLocation,
+    },
+    offers: {
+      "@type": "Offer",
+      lowPrice: tour.priceRange.min,
+      highPrice: tour.priceRange.max,
+      priceCurrency: "INR",
+      url: `${SITE_URL}/tours/${tour.slug}`,
+    },
+    provider: {
+      "@type": "TravelAgency",
+      name: "Pure Traveller",
+      url: SITE_URL,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(tourJsonLd) }}
+      />
       {/* ─── Hero Banner ─── */}
       <section className="relative h-[40vh] md:h-[50vh] min-h-[400px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${tour.images[0]})` }}
+          role="img"
+          aria-label={`${tour.name} — ${tour.subtitle}`}
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-8 md:pb-12">

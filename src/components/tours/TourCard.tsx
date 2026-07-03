@@ -60,6 +60,8 @@ export function TourCard({ tour, className = "" }: TourCardProps) {
         <div
           className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
           style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined }}
+          role="img"
+          aria-label={tour.name}
         />
         {!heroImage && <div className="absolute inset-0 bg-stone-200" />}
         <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-stone-900/20 to-transparent" />

@@ -1,0 +1,30 @@
+# Pure Traveller
+
+> Motorcycle and adventure tour operator in North India
+
+Pure Traveller organises guided motorcycle expeditions and trekking tours across Himachal Pradesh, Ladakh, Uttarakhand, Kashmir, and Punjab. We offer bike tours, trekking packages, and cultural heritage journeys with flexible packages from ride-only to all-inclusive.
+
+## Pages
+- Home: `/` — Landing page with hero video, trending destinations, upcoming departures, travel categories, testimonials
+- Tours: `/tours` — Searchable listing of all 8 tours with filters by region, style, difficulty, duration
+- About: `/about` — Company story, team, mission
+- Contact: `/contact` — Contact form that sends email via Web3Forms
+
+## Tours
+- Manali - Leh Highway (10 days, Ladakh, ₹24,999+)
+- Spiti Valley Circuit (8 days, Himachal, ₹19,999+)
+- Kashmir Great Lakes Trek (7 days, Kashmir, ₹14,999+)
+- Zanskar Valley Expedition (14 days, Ladakh, ₹39,999+)
+- Valley of Flowers Trek (6 days, Uttarakhand, ₹11,999+)
+- Kinnaur - Kalpa Weekend Ride (4 days, Himachal, ₹9,999+)
+- Amritsar - Dharamshala Heritage (5 days, Punjab, ₹8,999+)
+- Chopta - Tungnath Winter Trek (4 days, Uttarakhand, ₹7,999+)
+
+## Contact
+- Phone: +91 96547 23856
+- WhatsApp: +919654723856
+- Email: hello@puretraveller.in
+- Address: Manali, Himachal Pradesh, India
+
+## Tech
+Built with Next.js 16, TypeScript, Tailwind CSS v4. Hosted on Vercel.
