@@ -125,13 +125,21 @@ export async function POST(request: NextRequest) {
   }
 
   const { data } = validation;
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || process.env.WEB3FORMS_KEY;
+
+  if (!accessKey) {
+    return NextResponse.json(
+      { error: "Server misconfiguration: Web3Forms key is missing." },
+      { status: 500 }
+    );
+  }
 
   try {
     const response = await fetch(WEB3FORMS_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_KEY,
+        access_key: accessKey,
         subject: data.subject || `New Enquiry from ${data.name} — Pure Traveller`,
         from_name: data.name,
         name: data.name,
@@ -143,14 +151,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
+      const text = await response.text();
       return NextResponse.json(
-        { error: "Failed to submit form. Please try again later." },
+        { error: `Web3Forms error (${response.status}): ${text}` },
         { status: 502 }
       );
     }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (e) {
+    console.error("Contact form error:", e);
     return NextResponse.json(
       { error: "Unable to reach email service. Please try again later." },
       { status: 502 }
