@@ -3,9 +3,10 @@ import type { NextRequest } from "next/server";
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
-const ALLOWED_ORIGINS = [
+const ALLOWED_ORIGINS: (string | RegExp)[] = [
   "https://puretraveller.in",
-  "http://localhost:3000",
+  /^https?:\/\/localhost(:\d+)?$/,
+  /\.vercel\.app$/,
 ];
 
 interface RequestBody {
@@ -85,7 +86,11 @@ export async function POST(request: NextRequest) {
 
   if (
     origin &&
-    !ALLOWED_ORIGINS.some((allowed) => origin.startsWith(allowed))
+    !ALLOWED_ORIGINS.some((allowed) =>
+      typeof allowed === "string"
+        ? origin.startsWith(allowed)
+        : allowed.test(origin)
+    )
   ) {
     return NextResponse.json(
       { error: "Origin not allowed." },
