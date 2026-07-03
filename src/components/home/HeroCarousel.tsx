@@ -26,7 +26,7 @@ export function HeroCarousel() {
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source
-          src="https://am0p1qvg0oxzzbwb.private.blob.vercel-storage.com/hero.mp4?vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfYU0wUDFRVkcwb1haekJXYiIsIm93bmVySWQiOiJ0ZWFtX0R5NXJjZDIxRWI4bFhLOFpvSWFvU3A4RSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgzMDM3MDA4MDg3LCJpYXQiOjE3ODI5OTM4MDgxNTd9.ZCG3T0Bxw4BAld1H99DmDQrOWZep_CNgugWMkqHcqu8&vercel-blob-signature=jsh4ZU5RA7X8HWOKvNj8E_EGZQLCI71fsMP8rlZ0EoE"
+          src="https://1czeipxq0mlnixlg.public.blob.vercel-storage.com/hero.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
