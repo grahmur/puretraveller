@@ -158,7 +158,8 @@ Sizes: `sm` (px-4 py-2 text-sm), `md` (px-6 py-3 text-base), `lg` (px-8 py-4 tex
 2. **Types** are defined in `src/lib/types/index.ts`. Always start there when adding fields.
 3. **Filtering** is client-side via `filterTours()` in `src/lib/utils/index.ts`.
 4. **Tour detail pages** use `generateStaticParams` to pre-render all tours at build time.
-5. **Contact form** is mock-only — it shows a success message but doesn't POST anywhere yet.
+5. **Contact form** posts to `/api/contact` (Next.js API route) which validates input and forwards to Web3Forms. Emails land at the address configured on the Web3Forms dashboard.
+6. **Newsletter form** (in Footer) also posts to `/api/contact` with a newsletter-specific subject.
 
 ---
 

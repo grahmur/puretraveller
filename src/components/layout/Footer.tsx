@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   SITE_NAME,
@@ -27,6 +28,37 @@ const travelStyles = [
 ];
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || status === "loading") return;
+
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Newsletter Subscriber",
+          email: email.trim(),
+          phone: "N/A",
+          message: "Newsletter subscription request.",
+          subject: "New Newsletter Subscription — Pure Traveller",
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
   return (
     <footer className="bg-brand text-white/70">
       <div className="mx-auto max-w-7xl px-4 py-12 md:py-20">
@@ -40,20 +72,39 @@ export function Footer() {
             exclusive offers.
           </p>
           <form
-            className="mx-auto flex flex-col sm:flex-row max-w-md gap-3"
-            onSubmit={(e) => e.preventDefault()}
+            className="mx-auto flex flex-col items-center max-w-md gap-3"
+            onSubmit={handleNewsletterSubmit}
           >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 rounded-lg bg-white/10 px-4 py-3 text-white placeholder-white/40 outline-none ring-1 ring-white/20 focus:ring-brand"
-            />
-            <button
-              type="submit"
-              className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-brand"
-            >
-              Subscribe
-            </button>
+            <div className="flex flex-col sm:flex-row w-full gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                className="flex-1 rounded-lg bg-white/10 px-4 py-3 text-white placeholder-white/40 outline-none ring-1 ring-white/20 focus:ring-brand"
+                required
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-brand disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "loading" ? "Subscribing..." : "Subscribe"}
+              </button>
+            </div>
+            {status === "success" && (
+              <p className="text-sm text-green-400">
+                Subscribed successfully! Welcome aboard.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="text-sm text-red-400">
+                Something went wrong. Please try again.
+              </p>
+            )}
           </form>
         </div>
 

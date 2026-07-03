@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import {
@@ -11,6 +11,40 @@ import {
 } from "@/lib/constants";
 import { tours } from "@/lib/data/tours";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /^[\d\s\-\+\(\)]{7,20}$/;
+
+interface FieldErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
+
+function validateForm(data: {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}): FieldErrors | null {
+  const errors: FieldErrors = {};
+
+  if (!data.name || data.name.trim().length < 2) {
+    errors.name = "Name must be at least 2 characters.";
+  }
+  if (!data.email || !EMAIL_REGEX.test(data.email.trim())) {
+    errors.email = "Please enter a valid email address.";
+  }
+  if (!data.phone || !PHONE_REGEX.test(data.phone.trim())) {
+    errors.phone = "Please enter a valid phone number.";
+  }
+  if (!data.message || data.message.trim().length < 10) {
+    errors.message = "Message must be at least 10 characters.";
+  }
+
+  return Object.keys(errors).length > 0 ? errors : null;
+}
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,46 +53,67 @@ export default function ContactPage() {
     preferredTour: "",
     message: "",
   });
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
+  const [serverError, setServerError] = useState("");
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback(
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[name as keyof FieldErrors];
+        return next;
+      });
+    },
+    []
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const errors = validateForm(formData);
+    if (errors) {
+      setFieldErrors(errors);
+      return;
+    }
+
     setSending(true);
+    setError(false);
+    setServerError("");
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-          subject: `New Enquiry from ${formData.name} — Pure Traveller`,
-          from_name: formData.name,
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          preferredTour: formData.preferredTour || "Not specified",
+          preferredTour: formData.preferredTour,
           message: formData.message,
         }),
       });
+
+      const result = await response.json();
 
       if (response.ok) {
         setSubmitted(true);
         setError(false);
       } else {
         setError(true);
+        setServerError(result.error || "Something went wrong.");
       }
     } catch {
       setError(true);
+      setServerError("Network error. Please check your connection.");
     } finally {
       setSending(false);
     }
@@ -86,7 +141,7 @@ export default function ContactPage() {
             </h2>
             {error && (
               <div className="mb-6 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-                Something went wrong. Please try again or email us directly at {CONTACT_EMAIL}.
+                {serverError || `Something went wrong. Please try again or email us directly at ${CONTACT_EMAIL}.`}
               </div>
             )}
             {submitted ? (
@@ -104,6 +159,8 @@ export default function ContactPage() {
                     onClick={() => {
                       setSubmitted(false);
                       setError(false);
+                      setServerError("");
+                      setFieldErrors({});
                       setFormData({
                         name: "",
                         email: "",
@@ -130,8 +187,11 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your full name"
-                    className="w-full rounded-lg border border-stone-200 px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors"
+                    className={`w-full rounded-lg border px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors ${fieldErrors.name ? "border-red-400" : "border-stone-200"}`}
                   />
+                  {fieldErrors.name && (
+                    <p className="mt-1 text-xs text-red-600">{fieldErrors.name}</p>
+                  )}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
@@ -145,8 +205,11 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="you@example.com"
-                      className="w-full rounded-lg border border-stone-200 px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors"
+                      className={`w-full rounded-lg border px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors ${fieldErrors.email ? "border-red-400" : "border-stone-200"}`}
                     />
+                    {fieldErrors.email && (
+                      <p className="mt-1 text-xs text-red-600">{fieldErrors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-stone-700 mb-1">
@@ -159,8 +222,11 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+91 XXXXXXXXXX"
-                      className="w-full rounded-lg border border-stone-200 px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors"
+                      className={`w-full rounded-lg border px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors ${fieldErrors.phone ? "border-red-400" : "border-stone-200"}`}
                     />
+                    {fieldErrors.phone && (
+                      <p className="mt-1 text-xs text-red-600">{fieldErrors.phone}</p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -192,8 +258,11 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell us about your travel plans..."
-                    className="w-full rounded-lg border border-stone-200 px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors resize-y"
+                    className={`w-full rounded-lg border px-4 py-3 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-colors resize-y ${fieldErrors.message ? "border-red-400" : "border-stone-200"}`}
                   />
+                  {fieldErrors.message && (
+                    <p className="mt-1 text-xs text-red-600">{fieldErrors.message}</p>
+                  )}
                 </div>
                 <Button type="submit" variant="primary" size="lg" className="w-full" disabled={sending}>
                   {sending ? "Sending..." : "Send Message"}
