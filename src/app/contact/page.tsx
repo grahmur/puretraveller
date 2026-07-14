@@ -325,24 +325,32 @@ export default function ContactPage() {
                 >
                   Instagram
                 </a>
-                <span className="text-stone-300">|</span>
-                <a
-                  href={SOCIAL_LINKS.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-stone-600 hover:text-brand/80 transition-colors"
-                >
-                  Facebook
-                </a>
-                <span className="text-stone-300">|</span>
-                <a
-                  href={SOCIAL_LINKS.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-stone-600 hover:text-brand/80 transition-colors"
-                >
-                  YouTube
-                </a>
+                {SOCIAL_LINKS.facebook && (
+                  <>
+                    <span className="text-stone-300">|</span>
+                    <a
+                      href={SOCIAL_LINKS.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-stone-600 hover:text-brand/80 transition-colors"
+                    >
+                      Facebook
+                    </a>
+                  </>
+                )}
+                {SOCIAL_LINKS.youtube && (
+                  <>
+                    <span className="text-stone-300">|</span>
+                    <a
+                      href={SOCIAL_LINKS.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-stone-600 hover:text-brand/80 transition-colors"
+                    >
+                      YouTube
+                    </a>
+                  </>
+                )}
               </div>
             </div>
 

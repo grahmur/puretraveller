@@ -88,7 +88,7 @@ const jsonLd = {
     addressCountry: "IN",
   },
   sameAs: [
-    "https://instagram.com/puretraveller",
+    "https://www.instagram.com/puretravellerofficial",
     "https://facebook.com/puretraveller",
     "https://youtube.com/@puretraveller",
   ],

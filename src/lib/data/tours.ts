@@ -1504,4 +1504,364 @@ export const tours: Tour[] = [
       },
     ],
   },
+
+  // ─── Tour 9: Jibhi Tour Package ──────────────────────────────────────
+  {
+    id: "tour-009",
+    slug: "jibhi-escape-waterfalls-wilderness",
+    name: "Jibhi Escape: Waterfalls & Wilderness",
+    subtitle: "Wander through charming mountain villages, relax by crystal-clear rivers, and discover hidden waterfalls",
+    type: "regular",
+    region: "himachal",
+    difficulty: "easy",
+    duration: { days: 3, nights: 2 },
+    startLocation: "Delhi",
+    endLocation: "Delhi",
+    overview:
+      "Discover the untouched beauty of Jibhi with Pure Traveller. Wander through charming mountain villages, relax by crystal-clear rivers, explore hidden waterfalls, and experience the peaceful charm of the Himalayas. This 3-day getaway from Delhi takes you to one of Himachal's best-kept secrets — Jibhi, a serene hamlet nestled in the Banjar Valley, surrounded by dense pine forests, gushing streams, and traditional wooden architecture that seems frozen in time. Perfect for nature lovers, couples, and anyone seeking a peaceful Himalayan escape.",
+    highlights: [
+      "Explore the hidden Jibhi Waterfall, a secluded cascade tucked deep in the forest",
+      "Walk across the charming wooden bridge over the Tirthan River in Jibhi village",
+      "Visit the serene Serolsar Lake, a pristine high-altitude lake surrounded by lush greenery",
+      "Experience a cosy bonfire night under a sky full of stars in the Banjar Valley",
+      "Stroll through traditional Himachali villages with their unique wooden architecture",
+      "Wake up to misty mornings and panoramic views of the Dhauladhar ranges",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Delhi to Jibhi | Overnight Journey",
+        description:
+          "Board the AC Semi-Sleeper Volvo Bus or Tempo Traveler from Delhi in the evening. Settle in for a comfortable overnight journey through the plains of Punjab and into the foothills of Himachal Pradesh. The excitement builds as the air grows cooler and the terrain slowly transforms from flat farmland to rolling hills.",
+      },
+      {
+        day: 2,
+        title: "Arrival in Jibhi | Waterfalls & Village Exploration",
+        description:
+          "Arrive in Jibhi by morning and check into your cosy hotel or homestay. After a warm breakfast, set out to explore the hidden Jibhi Waterfall — a short trek through thick pine forest leads to this secluded cascade where you can dip your feet in the crystal-clear pool. Walk through the village's charming wooden bridge area, explore the local market, and soak in the slow mountain life. As evening falls, gather around a bonfire (weather permitting) with your fellow travellers for stories, music, and stargazing.",
+        stayAt: "Hotel/Homestay in Jibhi/Banjar",
+      },
+      {
+        day: 3,
+        title: "Serolsar Lake & Return to Delhi",
+        description:
+          "After breakfast, drive to the trailhead for a morning trek to Serolsar Lake — a pristine alpine lake surrounded by dense oak forests. The 5 km trail through the Great Himalayan National Park buffer zone is alive with birdsong and forest scents. Spend time at this sacred lake before descending. By afternoon, board your return Volvo Bus or Tempo Traveler to Delhi, carrying back memories of misty Himalayan mornings, forest trails, and the simple beauty of Jibhi.",
+      },
+    ],
+    images: ["/images/tours/jibhi-tour-package.webp"],
+    featured: false,
+    style: "discovery",
+    departures: [
+      { date: "2026-07-18", spotsLeft: 10, guaranteed: true },
+      { date: "2026-08-01", spotsLeft: 12, guaranteed: true },
+      { date: "2026-08-15", spotsLeft: 8, guaranteed: false },
+      { date: "2026-09-05", spotsLeft: 10, guaranteed: false },
+      { date: "2026-10-02", spotsLeft: 12, guaranteed: false },
+    ],
+    rating: 4.6,
+    reviewCount: 0,
+    priceRange: { min: 5625, max: 5625 },
+    packages: [
+      {
+        id: "jib-std",
+        name: "Full Package",
+        tier: "standard",
+        description:
+          "Complete 3-day Jibhi getaway with Delhi transfers, comfortable stays, meals, and a Trip Captain to guide your experience.",
+        price: 5625,
+        inclusions: [
+          { icon: "\uD83D\uDE8D", label: "AC Semi-Sleeper Volvo Bus or Tempo Traveler (Delhi-Delhi)" },
+          { icon: "\uD83D\uDE90", label: "Tempo Traveler/Cab for all local sightseeing and transfers" },
+          { icon: "\uD83C\uDFE8", label: "2 nights accommodation on sharing basis: Hotel/Homestay in Jibhi/Banjar" },
+          { icon: "\uD83E\uDD7E", label: "Experienced and cool Trip Captain for the entire trip" },
+          { icon: "\uD83D\uDD25", label: "Bonfire (weather permitting) on any 1 night during the stay" },
+          { icon: "\uD83C\uDF7D\uFE0F", label: "4 meals: Dinner (2) and Breakfast (2), Day 1 dinner to Day 3 breakfast" },
+        ],
+      },
+    ],
+    included: [
+      "Transportation from Delhi to Delhi: AC Semi-Sleeper Volvo Bus or Tempo Traveler",
+      "Tempo Traveler/Cab at all other times for local explorations",
+      "2 Nights Accommodation on Sharing Basis: Hotel/Homestay (Jibhi/Banjar)",
+      "Experienced and cool Trip Captain",
+      "Bonfire (if weather permits) only on any 1 Night during the stay",
+      "4 Meals: Dinner (2) and Breakfast (2), starting from Dinner on Day 1 to Breakfast on Day 3",
+      "Driver allowances, toll taxes, parking, state taxes",
+    ],
+    excluded: [
+      "Any extra meals and stay arrangements apart from the ones mentioned under inclusions as per the itinerary",
+      "Travel Insurance, items of a personal nature like porterage, tips, laundry etc.",
+      "Any entry fees, extra expenses for optional activities or tickets, unless quoted in Inclusions",
+      "Cost of snow-chained or 4x4 Vehicle if needed due to heavy snowfall",
+      "Any other costing involved due to circumstances like natural calamity, weather conditions, riots, roadblocks, landslides or any other forced circumstances which are out of our control",
+      "Anything which is not mentioned in the above inclusions",
+      "GST (5%) is applicable extra",
+    ],
+    thingsToCarry: [
+      "Comfortable walking shoes or light trekking shoes for waterfall and lake trails",
+      "Warm jacket and a fleece layer — Jibhi evenings can get chilly even in summer",
+      "Rain jacket or poncho — mountain weather can change quickly",
+      "Sunscreen, sunglasses, and a cap or hat for daytime exploration",
+      "Personal water bottle (reusable) and small daypack for day hikes",
+      "Personal medication, mosquito repellent, and a power bank for your devices",
+    ],
+    faqs: [
+      {
+        question: "How long is the journey from Delhi to Jibhi?",
+        answer:
+          "The journey from Delhi to Jibhi takes approximately 12-14 hours by Volvo Bus or Tempo Traveler. You depart Delhi in the evening and arrive in Jibhi by the next morning. The road is well-maintained and the overnight journey is comfortable in the AC Semi-Sleeper Volvo Bus. Regular breaks are taken for refreshments and restroom stops along the way.",
+      },
+      {
+        question: "Is Jibhi suitable for families and senior citizens?",
+        answer:
+          "Absolutely. Jibhi is one of Himachal's most peaceful and accessible destinations. The treks to the waterfalls and Serolsar Lake are moderate and can be done at a relaxed pace. The village itself is easy to walk around, and the gentle mountain trails make it suitable for families with children (aged 6+) and senior citizens who are comfortable with light walking. Our Trip Captain adjusts the pace to suit the group.",
+      },
+      {
+        question: "What kind of accommodation can I expect in Jibhi?",
+        answer:
+          "You will stay in a comfortable hotel or a traditional Himachali homestay in Jibhi or the nearby Banjar area. Rooms are on a sharing basis (2-3 people per room) and come with attached washrooms, hot water, and cosy bedding. Homestays offer an authentic experience with warm local hospitality and home-cooked meals. The accommodations are simple but clean, warm, and full of mountain character.",
+      },
+      {
+        question: "What is the best time to visit Jibhi?",
+        answer:
+          "Jibhi is a year-round destination, but each season offers something different. March to June brings pleasant weather (15-25°C) with blooming rhododendrons — ideal for trekking. July to September is monsoon with lush green landscapes and gushing waterfalls, though occasional rain may affect outdoor activities. October to November offers crisp autumn skies and golden forests. December to February transforms Jibhi into a winter wonderland with occasional snowfall. We run trips throughout the year and adjust the itinerary based on seasonal conditions.",
+      },
+    ],
+  },
+
+  // ─── Tour 10: Ladakh Bike Trip — Srinagar to Manali ─────────────────
+  {
+    id: "tour-010",
+    slug: "ladakh-uncharted-umling-la-tso-moriri-turtuk",
+    name: "Ladakh Uncharted: Umling La, Tso Moriri & Turtuk",
+    subtitle: "The ultimate Srinagar to Manali bike trip through Ladakh's rarest treasures",
+    type: "bike",
+    region: "ladakh",
+    difficulty: "extreme",
+    duration: { days: 12, nights: 11 },
+    distance: 2200,
+    maxAltitude: 5790,
+    startLocation: "Srinagar",
+    endLocation: "Manali",
+    overview:
+      "Embark on the most comprehensive Leh Ladakh bike trip — a 2,200 km odyssey from the lush valleys of Srinagar through Ladakh's greatest treasures to the adventure capital of Manali. Conquer Umling La (5,790m), the world's highest motorable pass; camp beside the iridescent Tso Moriri; ride to Turtuk, India's northernmost village on the Pakistan border; traverse the dramatic landscapes of Nubra Valley, Pangong Tso, and the fabled Manali-Leh Highway. With an experienced Trip Captain leading the way, a 4x4 backup vehicle, bikes on rent with riding gears, and a dedicated support team, this 12-day expedition covers every corner of Ladakh that a motorcyclist dreams of.",
+    highlights: [
+      "Ride Umling La (5,790m) — the highest motorable pass in the world, near Hanle",
+      "Visit the remote Turtuk village, India's northernmost settlement, rich in Balti culture",
+      "Camp beside the pristine Tso Moriri — Ladakh's largest high-altitude lake at 4,522m",
+      "Cross Khardung La (5,359m), the legendary gateway to Nubra Valley",
+      "Ride the complete Manali-Leh Highway with its 22 Gata Loops and More Plains",
+      "Explore the historic monasteries of Diskit, Thiksey, and the Moonland of Lamayuru",
+      "Experience the ever-changing blues of Pangong Tso from the quieter southern shore",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Arrival in Srinagar | Shikara & Preparation",
+        description:
+          "Arrive in Srinagar and check into your hotel. Take an afternoon Shikara ride on the iconic Dal Lake, exploring floating gardens and ornate houseboats. In the evening, attend a comprehensive briefing with your expedition leader covering the route, altitude protocol, riding formations, and safety procedures. Complete bike allocation, document verification, and gear check. End the day with a traditional Kashmiri Wazwan welcome dinner.",
+        stayAt: "Hotel in Srinagar",
+        altitude: 1585,
+      },
+      {
+        day: 2,
+        title: "Srinagar to Kargil | Zoji La & Dras",
+        description:
+          "The expedition begins with one of Ladakh's most dramatic gateways — Zoji La (3,528m). The climb from Sonamarg through the stark, rocky pass offers breathtaking views of the Kashmir Valley receding behind. Descend into the Dras Valley and visit the Kargil War Memorial to pay respects. The landscape transforms from lush green Kashmir to barren Ladakhi mountains by the time you reach Kargil, an important town on the Srinagar-Leh Highway.",
+        stayAt: "Hotel in Kargil",
+        altitude: 2676,
+      },
+      {
+        day: 3,
+        title: "Kargil to Leh | Lamayuru & Moonland",
+        description:
+          "Continue on the Srinagar-Leh Highway through spectacular terrain. Stop at the ancient Lamayuru Monastery — one of Ladakh's oldest — perched dramatically amidst a surreal 'Moonland' landscape of eroded sedimentary formations. Ride past the confluence of the Indus and Zanskar rivers at Nimmu and the imposing Gurudwara Pathar Sahib. Arrive in Leh by afternoon with time to explore its charming streets and cafés.",
+        stayAt: "Hotel in Leh",
+        altitude: 3500,
+      },
+      {
+        day: 4,
+        title: "Leh | Acclimatisation & Monastery Tour",
+        description:
+          "A crucial acclimatisation day before tackling the high passes. Visit Thiksey Monastery, the 'Mini Potala of Ladakh', with its 15-metre Maitreya Buddha statue. Explore Shey Palace and the 3 Idiots school (Druk Padma Karpo). Spend the afternoon at Shanti Stupa for panoramic views of Leh, and shop at the bustling Leh Market. Get your bikes fully serviced for the demanding days ahead.",
+        stayAt: "Hotel in Leh",
+        altitude: 3500,
+      },
+      {
+        day: 5,
+        title: "Leh to Nubra Valley | Khardung La",
+        description:
+          "Ride up to Khardung La (5,359m) — one of the world's highest motorable passes. The sense of achievement at the summit is unforgettable. Descend the dramatic switchbacks into the lush Nubra Valley with its poplar-lined roads and vast sand dunes. Visit Diskit Monastery and its towering 32-metre Maitreya Buddha statue overlooking the valley. Take an optional Bactrian camel ride on the Hunder sand dunes at sunset.",
+        stayAt: "Camp in Nubra Valley",
+        altitude: 3048,
+      },
+      {
+        day: 6,
+        title: "Nubra Valley to Turtuk | The Northern Frontier",
+        description:
+          "Ride further north into one of Ladakh's most remote regions. This is a relatively unexplored stretch that takes you to Turtuk, a Balti village that was under Pakistani administration until 1971. Turtuk feels like stepping into a different world — with its apricot orchards, winding cobbled lanes, and unique Balti culture. Explore the village, interact with the warm locals, and savour fresh apricots (seasonal). This is the northernmost point of the expedition.",
+        stayAt: "Homestay in Turtuk",
+        altitude: 2950,
+      },
+      {
+        day: 7,
+        title: "Turtuk to Leh | The Shyok River Trail",
+        description:
+          "Bid farewell to Turtuk and begin the ride back along the Shyok River. This scenic back route offers a different perspective of the Nubra Valley with fewer tourists and stunning river crossings. Pass through Khardung village and ascend back over Khardung La. Arrive in Leh by evening with a deep sense of having explored Ladakh's true frontier.",
+        stayAt: "Hotel in Leh",
+        altitude: 3500,
+      },
+      {
+        day: 8,
+        title: "Leh to Hanle | Umling La — The World's Highest Pass",
+        description:
+          "Begin early for the most prestigious segment of the expedition. Ride through the Changthang plateau towards Hanle. Visit the Hanle Observatory — one of the world's highest astronomical observatories. Then tackle the crown jewel: Umling La (5,790m), the highest motorable pass in the world! The road, built by the BRO, is an engineering marvel. The thin air, vast openness, and the knowledge that you're standing at the highest drivable point on Earth make this an experience of a lifetime. Return to Hanle for the night under some of the clearest skies on the planet.",
+        stayAt: "Homestay in Hanle",
+        altitude: 4500,
+      },
+      {
+        day: 9,
+        title: "Hanle to Tso Moriri | The Blue Lake",
+        description:
+          "Ride through the vast Changthang Wildlife Sanctuary, keeping an eye out for kiang (Tibetan wild ass) and the rare black-necked crane. Arrive at Tso Moriri, Ladakh's largest high-altitude lake at 4,522m. Less touristed than Pangong, Tso Moriri offers an untouched, serene beauty with its deep blue waters, snow-capped backdrop, and the charming Korzok village on its shore. Camp beside the lake and watch the stars emerge in the pristine high-altitude night.",
+        stayAt: "Camp at Tso Moriri",
+        altitude: 4522,
+      },
+      {
+        day: 10,
+        title: "Tso Moriri to Sarchu | The Changthang Crossing",
+        description:
+          "Cross the vast Changthang plateau and rejoin the Manali-Leh Highway. Ride past the stunning Tso Kar — a salt lake that mirrors the sky — and through the More Plains, a surreal 40 km stretch of dead-straight tarmac at over 4,800m. Navigate the 22 hairpin bends of the Gata Loops and arrive at Sarchu, the high-altitude camping ground on the Himachal-Ladakh border. A campfire under the Milky Way caps an epic day of riding.",
+        stayAt: "Camp at Sarchu",
+        altitude: 4290,
+      },
+      {
+        day: 11,
+        title: "Sarchu to Manali | Baralacha La & Rohtang La",
+        description:
+          "The final riding day crosses the mighty Baralacha La (4,890m), where three mountain ranges converge. Pass through Keylong and the green Lahaul Valley with the Chandra River for company. Cross Rohtang La (3,978m) and descend into the cedar forests of Manali. The contrast from Ladakh's stark moonscape to Manali's lush greenery provides a fitting finale. Check into your hotel and celebrate the completion of this monumental expedition with the group.",
+        stayAt: "Hotel in Manali",
+        altitude: 2050,
+      },
+      {
+        day: 12,
+        title: "Departure from Manali",
+        description:
+          "After a well-earned breakfast, the expedition officially concludes. Transfer to Manali bus stand or Bhuntar Airport for your onward journey. You leave with a lifetime of memories — of the world's highest roads, of ancient villages on the edge of India, of lakes bluer than any photograph can capture, and of a motorcycle adventure that few have the privilege to experience.",
+      },
+    ],
+    images: ["/images/tours/ladakh-bike-trip-srinagar-manali.webp"],
+    featured: true,
+    style: "raid",
+    departures: [
+      { date: "2026-07-20", spotsLeft: 4, guaranteed: true },
+      { date: "2026-08-05", spotsLeft: 6, guaranteed: true },
+      { date: "2026-08-25", spotsLeft: 5, guaranteed: false },
+      { date: "2026-09-10", spotsLeft: 8, guaranteed: false },
+    ],
+    rating: 5.0,
+    reviewCount: 0,
+    priceRange: { min: 44999, max: 69999 },
+    packages: [
+      {
+        id: "lsm-basic",
+        name: "Rider Only",
+        tier: "basic",
+        description:
+          "For seasoned expedition riders — motorcycle, fuel, road captain, and permits included. Manage your own stays and meals.",
+        price: 44999,
+        inclusions: [
+          { icon: "\uD83C\uDFCD\uFE0F", label: "Royal Enfield Himalayan 450cc motorcycle rental" },
+          { icon: "\u26FD", label: "Unlimited fuel for the entire 2,200 km expedition" },
+          { icon: "\uD83D\uDC68\u200D\u2708\uFE0F", label: "Expedition leader, road captain, and mechanic" },
+          { icon: "\uD83C\uDFE5", label: "All permits: ILP, Umling La pass, border area passes, environmental fees" },
+          { icon: "\uD83D\uDEE0\uFE0F", label: "Comprehensive spare parts, toolkit, and puncture repair kit" },
+          { icon: "\uD83D\uDE91", label: "4x4 backup vehicle carrying fuel, spares, and emergency supplies" },
+        ],
+      },
+      {
+        id: "lsm-standard",
+        name: "Rider + Stay",
+        tier: "standard",
+        description:
+          "Our recommended choice — focus entirely on the ride while we handle comfortable stays and half-board meals.",
+        price: 57999,
+        label: "Most Popular",
+        inclusions: [
+          { icon: "\uD83C\uDFCD\uFE0F", label: "Royal Enfield Himalayan 450cc motorcycle rental" },
+          { icon: "\u26FD", label: "Unlimited fuel for the entire 2,200 km expedition" },
+          { icon: "\uD83D\uDC68\u200D\u2708\uFE0F", label: "Expedition leader, road captain, mechanic, and backup driver" },
+          { icon: "\uD83C\uDFE8", label: "11 nights accommodation (hotels, camps, homestays, guesthouses)" },
+          { icon: "\uD83C\uDF73", label: "Daily breakfast and dinner across all 11 stops" },
+          { icon: "\uD83D\uDE91", label: "4x4 backup vehicle carrying fuel, spares, luggage, and medical supplies" },
+        ],
+      },
+      {
+        id: "lsm-premium",
+        name: "All Inclusive",
+        tier: "premium",
+        description:
+          "The definitive Ladakh expedition — premium stays, all meals, porters, transfers, and a Shikara ride in Srinagar.",
+        price: 69999,
+        inclusions: [
+          { icon: "\uD83C\uDFCD\uFE0F", label: "Royal Enfield Himalayan 450cc motorcycle rental" },
+          { icon: "\u26FD", label: "Unlimited fuel for the entire 2,200 km expedition" },
+          { icon: "\uD83D\uDC68\u200D\u2708\uFE0F", label: "Expedition leader, road captain, mechanic, driver, and porter team" },
+          { icon: "\u2708\uFE0F", label: "Airport transfers (Srinagar pickup & Manali drop) in private SUV" },
+          { icon: "\uD83C\uDFE8", label: "11 nights premium accommodation with attached baths where available" },
+          { icon: "\uD83C\uDF7D\uFE0F", label: "All meals — breakfast, packed lunch, dinner, and trail snacks" },
+        ],
+      },
+    ],
+    included: [
+      "Royal Enfield Himalayan 450cc motorcycle on rent with riding gears (helmet, knee & elbow guards)",
+      "Unlimited fuel for the full 2,200 km expedition",
+      "4x4 backup vehicle carrying fuel, luggage, spares, and emergency supplies",
+      "Experienced Trip Captain / Marshal and certified mechanic throughout the expedition",
+      "Doctor or medical professional on standby for the group",
+      "All permits including ILP, Umling La access, border area passes, and environmental cess",
+      "Comprehensive medical kit, pulse oximeter, BP monitor, and supplemental oxygen",
+      "Satellite communication device for emergency use in remote no-network zones",
+      "Sightseeing and activities as per the itinerary",
+      "24x7 Trip Assistance for any on-road or logistical support",
+    ],
+    excluded: [
+      "Motorcycle security deposit (₹10,000, refundable on safe return)",
+      "Major motorcycle damage caused by rider negligence or off-road misuse",
+      "Travel and medical insurance with high-altitude motorbiking and evacuation cover",
+      "Personal expenses: laundry, phone calls, snacks, beverages, mineral water, tips",
+      "Transportation to Srinagar and return from Manali (flights, buses, or personal vehicle)",
+      "Any costs arising from route changes due to political unrest, road closures, or natural calamity",
+    ],
+    thingsToCarry: [
+      "Valid driving licence for geared motorcycles (original + photocopies) and government ID proof",
+      "Full riding gear: armoured jacket, riding pants or knee guards, gloves, and sturdy boots",
+      "DOT/ECE-certified full-face helmet with fog-resistant visor and balaclava",
+      "Extreme cold weather layers: thermal innerwear, down jacket rated below -10°C, windproof shell",
+      "High SPF sunscreen, UV goggles, neck gaiter, and an insulated water bottle",
+      "Personal medication, Diamox (acetazolamide), anti-diarrhoeal tablets, and rehydration salts",
+    ],
+    faqs: [
+      {
+        question: "How difficult is Umling La compared to Khardung La?",
+        answer:
+          "Umling La at 5,790m is significantly higher than Khardung La (5,359m), making it objectively more challenging in terms of altitude. The thin air at this elevation can cause breathlessness even during minimal exertion. However, the road surface to Umling La, being relatively new (built by BRO in recent years), is actually in good condition. Khardung La tends to have more tourist traffic and rougher patches. The key challenge at Umling La is the altitude itself — our itinerary includes an overnight stay at Hanle (4,500m) the night before, which helps with acclimatisation. Our expedition team carries supplemental oxygen and monitors every rider's oxygen saturation levels regularly.",
+      },
+      {
+        question: "Do I need special permits for Umling La, Turtuk, and Hanle?",
+        answer:
+          "Yes. The Umling La-Hanle region and Turtuk both require an Inner Line Permit (ILP) for Indian citizens, which we arrange for all participants. Foreign nationals require a Protected Area Permit (PAP) for the entire Ladakh region, which is also arranged by us. Our packages include all permit processing fees for Hanle, Umling La, Turtuk, and all border areas covered in the itinerary. You need to provide passport-sized photos and a copy of your ID proof at the time of booking for permit processing.",
+      },
+      {
+        question: "What makes this 12-day route more comprehensive than the standard Manali-Leh trip?",
+        answer:
+          "The standard Manali-Leh Highway (tour-001) is a 10-day expedition covering the classic route. This 12-day Srinagar-to-Manali expedition adds several exclusive elements: the stunning Srinagar-Leh Highway (widely considered more scenic than the Manali side), the remote Balti village of Turtuk at India's northern frontier, the world's highest pass at Umling La (5,790m), the serene and less-touristed Tso Moriri, and the complete Changthang plateau crossing. It's effectively two legendary routes (Srinagar-Leh and Manali-Leh) combined into one grand expedition with the additional bucket-list destinations that most Ladakh tours miss. If you have the time, this is the definitive 'do-it-all' Ladakh motorcycle experience.",
+      },
+      {
+        question: "What is the fitness level required for this expedition?",
+        answer:
+          "This is rated 'extreme' for a reason. You need solid motorcycle riding skills — at least 2 years of experience riding 200cc+ motorcycles on mountain roads. The expedition covers 1,400 km over 12 days, with riding days averaging 6-8 hours. You'll encounter broken tarmac, gravel, water crossings, and high-altitude passes. Physical fitness is crucial: you should be able to handle long riding days, pick up a fallen motorcycle (unlikely but possible), and cope with altitude. We recommend a fitness routine focused on cardio endurance and core strength at least 6 weeks before departure. Mental resilience is equally important — the remote stretches through Changthang can be isolating, but that's also where the magic lies.",
+      },
+    ],
+  },
 ];

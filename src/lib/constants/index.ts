@@ -18,14 +18,14 @@ export const SITE_DESCRIPTION =
 export const CONTACT_PHONE = "+91 96547 23856";
 export const CONTACT_WHATSAPP = "+919654723856";
 export const CONTACT_EMAIL = "hello@puretraveller.in";
-export const CONTACT_ADDRESS = "Manali, Himachal Pradesh, India";
+export const CONTACT_ADDRESS = "Block B, Prem Nagar, Anand Parbat, New Delhi, Delhi, 110008, India";
 
 // ---- Social Links ----
 
 export const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/puretraveller",
-  facebook: "https://facebook.com/puretraveller",
-  youtube: "https://youtube.com/@puretraveller",
+  instagram: "https://www.instagram.com/puretravellerofficial",
+  facebook: "",
+  youtube: "",
   whatsapp: "https://wa.me/919654723856",
 };
 

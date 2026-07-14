@@ -26,17 +26,18 @@ const jsonLd = {
   name: "Pure Traveller",
   url: "https://puretraveller.in",
   description:
-    "Pure Traveller is a motorcycle and adventure tour operator based in Manali, Himachal Pradesh. We organise curated bike trips, trekking expeditions, and cultural tours across North India — from the high passes of Ladakh and the remote valleys of Spiti to the alpine meadows of Kashmir and the spiritual trails of Uttarakhand. Every journey is hand-scouted, led by experienced local guides, and built around safety, camaraderie, and the pure joy of travel.",
+    "Pure Traveller is a motorcycle and adventure tour operator based in New Delhi, India. We organise curated bike trips, trekking expeditions, and cultural tours across North India — from the high passes of Ladakh and the remote valleys of Spiti to the alpine meadows of Kashmir and the spiritual trails of Uttarakhand. Every journey is hand-scouted, led by experienced local guides, and built around safety, camaraderie, and the pure joy of travel.",
   email: "hello@puretraveller.in",
   telephone: "+91 96547 23856",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Manali",
-    addressRegion: "Himachal Pradesh",
+    addressLocality: "Anand Parbat",
+    addressRegion: "New Delhi, Delhi",
+    postalCode: "110008",
     addressCountry: "IN",
   },
   sameAs: [
-    "https://instagram.com/puretraveller",
+    "https://www.instagram.com/puretravellerofficial",
     "https://facebook.com/puretraveller",
     "https://youtube.com/@puretraveller",
   ],
