@@ -132,11 +132,11 @@ export default function AboutPage() {
       <section className="py-16 px-4 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <SectionHeading title="Meet the Team" />
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-12 flex justify-center">
             {team.map((member) => (
               <div
                 key={member.id}
-                className="bg-white rounded-xl p-8 text-center shadow-sm"
+                className="bg-white rounded-xl p-8 text-center shadow-sm max-w-md"
               >
                 <div className="w-24 h-24 bg-brand text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
                   {member.avatarInitials}
